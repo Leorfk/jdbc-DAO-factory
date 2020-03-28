@@ -29,5 +29,9 @@ public class Program {
         for (Seller obj: allSellers) {
             System.out.println(obj);
         }
+
+        System.out.println("Teste método insert =======> Seller");
+        Seller objSeller = new Seller(null, "Teste", "teste@teste", new Date(), 1000.00, new Department(2, null));
+        sellerDAO.insert(objSeller);
     }
 }
