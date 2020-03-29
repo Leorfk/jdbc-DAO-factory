@@ -33,5 +33,10 @@ public class Program {
         System.out.println("Teste método insert =======> Seller");
         Seller objSeller = new Seller(null, "Teste", "teste@teste", new Date(), 1000.00, new Department(2, null));
         sellerDAO.insert(objSeller);
+
+        System.out.println("Teste método update =======> Seller");
+        Seller newSeller = sellerDAO.findById(4);
+        newSeller.setName("Ronnie James");
+        sellerDAO.update(newSeller);
     }
 }
