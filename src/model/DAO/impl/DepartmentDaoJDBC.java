@@ -4,6 +4,7 @@ import db.DB;
 import db.DbException;
 import model.DAO.DepartmentDAO;
 import model.Department;
+import utils.Instantiation;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -44,10 +45,7 @@ public class DepartmentDaoJDBC implements DepartmentDAO {
             rs = ps.executeQuery();
 
             if (rs.next()){
-                Department dep = new Department();
-                dep.setId(rs.getInt("Id"));
-                dep.setName(rs.getString("Name"));
-                return dep;
+                return Instantiation.instantiateDepartment(rs);
             }
             return null;
         }catch (SQLException e){

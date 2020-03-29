@@ -5,6 +5,7 @@ import db.DbException;
 import model.DAO.SellerDAO;
 import model.Department;
 import model.Seller;
+import utils.Instantiation;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -117,8 +118,8 @@ public class SellerDaoJDBC implements SellerDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             if (rs.next()){
-                Department department = instantiateDepartment(rs);
-                Seller seller = instantiateSeller(rs, department);
+                Department department = Instantiation.instantiateDepartment(rs);
+                Seller seller = Instantiation.instantiateSeller(rs, department);
                 return seller;
             }
             return null;
@@ -152,10 +153,10 @@ public class SellerDaoJDBC implements SellerDAO {
                 Department dep = map.get(rs.getInt("DepartmentId"));
 
                 if (dep == null){
-                    dep = instantiateDepartment(rs);
+                    dep = Instantiation.instantiateDepartment(rs);
                     map.put(rs.getInt("DepartmentId"), dep);
                 }
-                Seller seller = instantiateSeller(rs, dep);
+                Seller seller = Instantiation.instantiateSeller(rs, dep);
                 sellers.add(seller);
 
             }
@@ -166,24 +167,6 @@ public class SellerDaoJDBC implements SellerDAO {
             DB.closeStatement(ps);
             DB.closeResultSet(rs);
         }
-    }
-
-    private Seller instantiateSeller(ResultSet rs, Department department) throws SQLException {
-        Seller seller = new Seller();
-        seller.setId(rs.getInt("Id"));
-        seller.setName(rs.getString("Name"));
-        seller.setEmail(rs.getString("Email"));
-        seller.setBirthDate(rs.getDate("BirthDate"));
-        seller.setBaseSalary(rs.getDouble("BaseSalary"));
-        seller.setDepartment(department);
-        return seller;
-    }
-
-    private Department instantiateDepartment(ResultSet rs) throws SQLException {
-        Department department = new Department();
-        department.setId(rs.getInt("DepartmentId"));
-        department.setName(rs.getString("DepartmentId"));
-        return department;
     }
 
     @Override
@@ -205,10 +188,10 @@ public class SellerDaoJDBC implements SellerDAO {
                 Department dep = map.get(rs.getInt("DepartmentId"));
 
                 if (dep == null){
-                    dep = instantiateDepartment(rs);
+                    dep = Instantiation.instantiateDepartment(rs);
                     map.put(rs.getInt("DepartmentId"), dep);
                 }
-                Seller seller = instantiateSeller(rs, dep);
+                Seller seller = Instantiation.instantiateSeller(rs, dep);
                 sellers.add(seller);
 
             }
