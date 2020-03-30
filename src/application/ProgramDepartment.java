@@ -27,5 +27,9 @@ public class ProgramDepartment {
         for (Department depart: list) {
             System.out.println(depart);
         }
+
+        System.out.println("\nDepartment insert");
+        Department department = new Department(null, "Server");
+        departmentDAO.insert(department);
     }
 }
