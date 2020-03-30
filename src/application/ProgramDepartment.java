@@ -28,8 +28,18 @@ public class ProgramDepartment {
             System.out.println(depart);
         }
 
-        System.out.println("\nDepartment insert");
+/*        System.out.println("\nDepartment insert");
         Department department = new Department(null, "Server");
-        departmentDAO.insert(department);
+        departmentDAO.insert(department);*/
+
+        System.out.println("\nDepartment update");
+        Department newDepartment = new Department(3, "Heavy Metal");
+        departmentDAO.update(newDepartment);
+
+        System.out.println("\nDepartment delete");
+        System.out.println("Enter department ID: ");
+        int id = sc.nextInt();
+        String result = departmentDAO.deleteById(id) ? "Delete completed!!!" : "ID not found";
+        System.out.println(result);
     }
 }
